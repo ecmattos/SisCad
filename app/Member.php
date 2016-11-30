@@ -50,6 +50,7 @@ class Member extends Revisionable
         'bank_id' => 'Banco',
         'bank_agency' => 'Agência', 
         'bank_account' => 'Conta Corrente', 
+        'comments' => 'Observações',
         'deleted_at' => 'Excluído'
     ];
     protected $revisionFormattedFields = [
