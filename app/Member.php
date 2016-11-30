@@ -126,7 +126,7 @@ class Member extends Revisionable
     {
         $value = $this->mobile;
         
-        $mobile_mask = Utils::mask($value, '(##) ####-####');
+        $mobile_mask = Utils::mask($value, '(##) #####-####');
         
         return $mobile_mask;
     }
