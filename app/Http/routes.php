@@ -219,6 +219,14 @@ Route::get('/payments/search', ['as' => 'payments.search', 'uses' => 'PaymentsCo
 Route::post('/payments/search_results', ['as' => 'payments.search_results', 'uses' => 'PaymentsController@search_results']);
 Route::get('/payments/search_results_back', ['as' => 'payments.search_results_back', 'uses' => 'PaymentsController@search_results_back']);
 
+Route::get('/patrimonial_statuses/', ['as' => 'patrimonial_statuses', 'uses' => 'PatrimonialStatusesController@index']);
+Route::get('/patrimonial_statuses/create', ['as' => 'patrimonial_statuses.create', 'uses' => 'PatrimonialStatusesController@create', 'middleware' => ['acl:patrimonial_statuses.create']]);
+Route::get('/patrimonial_statuses/{id}/show', ['as' => 'patrimonial_statuses.show', 'uses' => 'PatrimonialStatusesController@show', 'middleware' => ['acl:patrimonial_statuses.show']]);
+Route::get('/patrimonial_statuses/{id}/edit', ['as' => 'patrimonial_statuses.edit', 'uses' => 'PatrimonialStatusesController@edit', 'middleware' => ['acl:patrimonial_statuses.edit']]);
+Route::get('/patrimonial_statuses/{id}/destroy', ['as' => 'patrimonial_statuses.destroy', 'uses' => 'PatrimonialStatusesController@destroy', 'middleware' => ['acl:patrimonial_statuses.destroy']]);
+Route::put('/patrimonial_statuses/{id}/update', ['as' => 'patrimonial_statuses.update', 'uses' => 'PatrimonialStatusesController@update']);
+Route::post('/patrimonial_statuses', ['as' => 'patrimonial_statuses.store', 'uses' => 'PatrimonialStatusesController@store']);
+
 Route::get('/patrimonial_types/', ['as' => 'patrimonial_types', 'uses' => 'PatrimonialTypesController@index']);
 Route::get('/patrimonial_types/create', ['as' => 'patrimonial_types.create', 'uses' => 'PatrimonialTypesController@create', 'middleware' => ['acl:patrimonial_types.create']]);
 Route::get('/patrimonial_types/{id}/show', ['as' => 'patrimonial_types.show', 'uses' => 'PatrimonialTypesController@show', 'middleware' => ['acl:patrimonial_types.show']]);

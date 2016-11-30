@@ -144,7 +144,7 @@
 									<li class="col-sm-4">
 										<ul>
 											<li class="dropdown-header">Ativos</li>
-											<li><a href="{{ url('/regions/') }}">Situações</a></li>
+											<li><a href="{{ url('/patrimonial_statuses/') }}">Situações</a></li>
 											<li><a href="{{ url('/patrimonial_types/') }}">Tipos</a></li>
 											<li><a href="{{ url('/patrimonial_sub_types/') }}">Sub-tipos</a></li>
 											<li><a href="{{ url('/patrimonial_sectors/') }}">Setores</a></li>
