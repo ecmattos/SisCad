@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: SisCad
+        psr4_prefix: SisCad
+        src_path: app
