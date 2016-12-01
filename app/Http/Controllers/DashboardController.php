@@ -12,6 +12,7 @@ use SisCad\Http\Controllers\Controller;
 use SisCad\Repositories\PlanRepository;
 use SisCad\Repositories\RegionRepository;
 use SisCad\Repositories\MemberRepository;
+use SisCad\Repositories\MemberStatusRepository;
 use SisCad\Repositories\CityRepository;
 use SisCad\Repositories\PartnerRepository;
 use SisCad\Repositories\PartnerTypeRepository;
@@ -21,15 +22,17 @@ class DashboardController extends Controller
     private $regionRepository;
     private $planRepository;
     private $memberRepository;
+    private $member_statusRepository;
     private $cityRepository;
     private $partnerRepository;
-    private $partnertypeRepository;
+    private $partner_typeRepository;
 
-    public function __construct(RegionRepository $regionRepository, CityRepository $cityRepository, PlanRepository $planRepository, MemberRepository $memberRepository, PartnerRepository $partnerRepository, PartnerTypeRepository $partner_typeRepository)
+    public function __construct(RegionRepository $regionRepository, CityRepository $cityRepository, PlanRepository $planRepository, MemberRepository $memberRepository, MemberStatusRepository $member_statusRepository, PartnerRepository $partnerRepository, PartnerTypeRepository $partner_typeRepository)
     {
         $this->regionRepository         = $regionRepository;
         $this->planRepository           = $planRepository;
         $this->memberRepository         = $memberRepository;
+        $this->member_statusRepository  = $member_statusRepository;
         $this->cityRepository           = $cityRepository;
         $this->partnerRepository        = $partnerRepository;
         $this->partner_typeRepository   = $partner_typeRepository;
@@ -40,81 +43,219 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function pc_members()
+    public function pc_members(Request $request)
     {
-        $plan1 = $this->planRepository->findPlanById(1);
-        
-        $plan1_allmembersbystatus = $this->memberRepository->allMembersByPlanStatus(1, 2);
+        $pc_member_status_id = $request->get('pc_member_status_id');
 
-        #$plan1_allmembersbystatus = $this->memberRepository->allMembersByPlanStatus(1, 2);
-
-        $plan1_allmembersmalebystatus = $this->memberRepository->allMembersGenderByPlanStatus(1, 2, 1);
-
-        $plan1_allmembersfemalebystatus = $this->memberRepository->allMembersGenderByPlanStatus(1, 2, 2);
-
-        $plan1_allmembersemailbystatus = $this->memberRepository->allMembersEmailByPlanStatus(1, 2);
-
-        $plan1_regions = $this->regionRepository->allRegions();
-        $plan1_regions->load(['members' => function($q) 
+        if($pc_member_status_id==0)
         {
-            $q->whereMemberStatusId(2);
-            $q->wherePlanId(1);
-            $q->get();
-        }]);
+            #$member_status = ['description' = 'TODOS'];
 
-        $plan1_cities = $this->cityRepository->allCities();
-        $plan1_cities->load(['members' => function($q) 
+            $plan1 = $this->planRepository->findPlanById(1);
+            
+            $plan1_allmembersbystatus = $this->memberRepository->allMembersByPlan(1);
+
+            $plan1_allmembersmalebystatus = $this->memberRepository->allMembersGenderByPlan(1, 1);
+
+            $plan1_allmembersfemalebystatus = $this->memberRepository->allMembersGenderByPlan(1, 2);
+
+            $plan1_allmembersemailbystatus = $this->memberRepository->allMembersEmailByPlan(1);
+
+            $plan1_regions = $this->regionRepository->allRegions();
+            $plan1_regions->load(['members' => function($q) 
+            {
+                $q->wherePlanId(1);
+                $q->get();
+            }]);
+
+            $plan1_cities = $this->cityRepository->allCities();
+            $plan1_cities->load(['members' => function($q) 
+            {
+                $q->wherePlanId(1);
+                $q->get();
+            }]);
+
+
+
+            $plan2 = $this->planRepository->findPlanById(2);
+            
+            $plan2_allmembersbystatus = $this->memberRepository->allMembersByPlan(2);
+
+            $plan2_allmembersmalebystatus = $this->memberRepository->allMembersGenderByPlan(2, 1);
+
+            $plan2_allmembersfemalebystatus = $this->memberRepository->allMembersGenderByPlan(2, 2);
+
+            $plan2_allmembersemailbystatus = $this->memberRepository->allMembersEmailByPlan(2);
+
+            $plan2_regions = $this->regionRepository->allRegions();
+            $plan2_regions->load(['members' => function($q) 
+            {
+                $q->wherePlanId(2);
+                $q->get();
+            }]);
+
+            $plan2_cities = $this->cityRepository->allCities();
+            $plan2_cities->load(['members' => function($q) 
+            {
+                $q->wherePlanId(2);
+                $q->get();
+            }]);
+
+
+            $plan_regions = $this->regionRepository->allRegions();
+            
+            $plan_cities = $this->cityRepository->allCities();
+            
+        }
+        else
         {
-            $q->whereMemberStatusId(2);
-            $q->wherePlanId(1);
-            $q->get();
-        }]);
+            $member_status = $this->member_statusRepository->findMemberStatusById($pc_member_status_id);
+
+            $plan1 = $this->planRepository->findPlanById(1);
+            
+            $plan1_allmembersbystatus = $this->memberRepository->allMembersByPlanStatus(1, $pc_member_status_id);
+
+            $plan1_allmembersmalebystatus = $this->memberRepository->allMembersGenderByPlanStatus(1, $pc_member_status_id, 1);
+
+            $plan1_allmembersfemalebystatus = $this->memberRepository->allMembersGenderByPlanStatus(1, $pc_member_status_id, 2);
+
+            
+            $plan1_allmembersemailbystatus = $this->memberRepository->allMembersEmailByPlanStatus(1, $pc_member_status_id);
+
+            $plan1_regions = $this->regionRepository->allRegions();
+            if($pc_member_status_id==1)
+            {
+                $plan1_regions->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(1);
+                    $q->wherePlanId(1);
+                    $q->get();
+                }]);
+            }
+            else
+            {
+                $plan1_regions->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(2);
+                    $q->wherePlanId(1);
+                    $q->get();
+                }]);
+            }
 
 
-        
-        $plan2 = $this->planRepository->findPlanById(2);
-        
-        $plan2_allmembersbystatus = $this->memberRepository->allMembersByPlanStatus(2, 2);
+            $plan1_cities = $this->cityRepository->allCities();
+            if($pc_member_status_id==1)
+            {
+                $plan1_cities->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(1);
+                    $q->wherePlanId(1);
+                    $q->get();
+                }]);
+            }
+            else
+            {
+                $plan1_cities->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(2);
+                    $q->wherePlanId(1);
+                    $q->get();
+                }]);
+            }
 
-        #$plan2_allmembersbystatus = $this->memberRepository->allMembersByPlanStatus(2, 2);
+            
+            $plan2 = $this->planRepository->findPlanById(2);
+            
+            $plan2_allmembersbystatus = $this->memberRepository->allMembersByPlanStatus(2, $pc_member_status_id);
 
-        $plan2_allmembersmalebystatus = $this->memberRepository->allMembersGenderByPlanStatus(2, 2, 1);
+            #$plan2_allmembersbystatus = $this->memberRepository->allMembersByPlanStatus(2, 2);
 
-        $plan2_allmembersfemalebystatus = $this->memberRepository->allMembersGenderByPlanStatus(2, 2, 2);
+            $plan2_allmembersmalebystatus = $this->memberRepository->allMembersGenderByPlanStatus(2, $pc_member_status_id, 1);
 
-        $plan2_allmembersemailbystatus = $this->memberRepository->allMembersEmailByPlanStatus(2, 2);
-        
-        $plan2_regions = $this->regionRepository->allRegions();
-        $plan2_regions->load(['members' => function($q) 
-        {
-            $q->whereMemberStatusId(2);
-            $q->wherePlanId(2);
-            $q->get();
-        }]);
+            $plan2_allmembersfemalebystatus = $this->memberRepository->allMembersGenderByPlanStatus(2, $pc_member_status_id, 2);
 
-        $plan2_cities = $this->cityRepository->allCities();
-        $plan2_cities->load(['members' => function($q) 
-        {
-            $q->whereMemberStatusId(2);
-            $q->wherePlanId(2);
-            $q->get();
-        }]);
-        
-        $plan_regions = $this->regionRepository->allRegions();
-        $plan_regions->load(['members' => function($q) 
-        {
-            $q->whereMemberStatusId(2);
-            $q->get();
-        }]);
+            $plan2_allmembersemailbystatus = $this->memberRepository->allMembersEmailByPlanStatus(2, $pc_member_status_id);
+            
+            $plan2_regions = $this->regionRepository->allRegions();
+            if($pc_member_status_id==1)
+            {
+                $plan2_regions->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(1);
+                    $q->wherePlanId(2);
+                    $q->get();
+                }]);
+            }
+            else
+            {
+                $plan2_regions->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(2);
+                    $q->wherePlanId(2);
+                    $q->get();
+                }]);
+            }
 
-        $plan_cities = $this->cityRepository->allCities();
-        $plan_cities->load(['members' => function($q) 
-        {
-            $q->whereMemberStatusId(2);
-            $q->get();
-        }]);
+            $plan2_cities = $this->cityRepository->allCities();
+            if($pc_member_status_id==1)
+            {
+                $plan2_cities->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(1);
+                    $q->wherePlanId(2);
+                    $q->get();
+                }]);
+            }
+            else
+            {
+                $plan2_cities->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(2);
+                    $q->wherePlanId(2);
+                    $q->get();
+                }]);
+            }
+            
+            $plan_regions = $this->regionRepository->allRegions();
+            if($pc_member_status_id==1)
+            {
+                $plan_regions->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(1);
+                    $q->get();
+                }]);
+            }
+            else
+            {
+                $plan_regions->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(2);
+                    $q->get();
+                }]);
+            }
 
-        return view('dashboard.members', compact('plan1', 'plan1_allmembersbystatus', 'plan1_allmembersmalebystatus', 'plan1_allmembersfemalebystatus', 'plan1_allmembersemailbystatus', 'plan1_regions', 'plan1_cities', 'plan2', 'plan2_allmembersbystatus', 'plan2_allmembersmalebystatus', 'plan2_allmembersfemalebystatus', 'plan2_allmembersemailbystatus', 'plan2_regions', 'plan2_cities', 'plan_regions', 'plan_cities'));//
+            
+
+            $plan_cities = $this->cityRepository->allCities();
+            if($pc_member_status_id==1)
+            {
+                $plan_cities->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(1);
+                    $q->get();
+                }]);
+            }
+            else
+            {
+                $plan_cities->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(2);
+                    $q->get();
+                }]);
+            }
+        }
+
+        return view('dashboard.members', compact('pc_member_status_id', 'member_status', 'plan1', 'plan1_allmembersbystatus', 'plan1_allmembersmalebystatus', 'plan1_allmembersfemalebystatus', 'plan1_allmembersemailbystatus', 'plan1_regions', 'plan1_cities', 'plan2', 'plan2_allmembersbystatus', 'plan2_allmembersmalebystatus', 'plan2_allmembersfemalebystatus', 'plan2_allmembersemailbystatus', 'plan2_regions', 'plan2_cities', 'plan_regions', 'plan_cities'));//
     }
 
     public function members_reports(Request $request)

@@ -8,7 +8,7 @@
 	   		<div class="btn-group btn-group-sm pull-right">
           		<a href="{!! route('roles') !!}" type="button" class="btn btn-xs btn-primary" rel="tooltip" title="Incluir"><i class="fa fa-search"></i></a>
         	</div>
-	   		<hr class="hr-primary" />
+	   		<hr class="hr-warning" />
 	   	</h4>
 	</div>
 

@@ -8,7 +8,7 @@
 	   		<div class="btn-group btn-group-sm pull-right">
           		<a href="{!! route('patrimonial_sectors.create') !!}" type="button" class="round round-sm hollow green" rel="tooltip" title="Incluir"><i class="fa fa-file-o"></i></a>
         	</div>
-	   		<hr class="hr-primary" />
+	   		<hr class="hr-warning" />
 	   	</h4>
 	</div>
 				

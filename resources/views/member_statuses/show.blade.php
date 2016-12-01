@@ -11,7 +11,7 @@
           		<a href="{!! route('member_statuses') !!}" type="button" class="round round-sm hollow" rel="tooltip" title="Pesquisar"><i class="fa fa-search"></i></a>
         	</div>
       	</h4>
-      	<hr class="hr-primary" />
+      	<hr class="hr-warning" />
   	</div>
 
   	<div class="row">

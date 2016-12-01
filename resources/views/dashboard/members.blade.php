@@ -6,21 +6,24 @@
         <h4>
             <i class="fa fa-users"></i> 
             Associados - Painel de controle
-            <div class="btn-group btn-group-sm pull-right">
+            <div class="btn-group btn-group-sm btn-group-primary pull-right" role="toolbar">
+                <a type="button" href="{!! route('dashboard.pc_members', ['pc_member_status_id' => 2]) !!}" class="btn btn-default">ATIVOS</a>
+                <a type="button" href="{!! route('dashboard.pc_members', ['pc_member_status_id' => 1]) !!}" class="btn btn-default">INATIVOS</a>
+                |
                 <a href="{!! route('dashboard.pc_partners') !!}" type="button" class="round round-sm hollow" rel="tooltip" title="Ir para Painel Controle Parceiros"><i class="fa fa-sitemap"></i></a>
                 |
                 <a href="{!! route('members.create') !!}" type="button" class="round round-sm hollow green" rel="tooltip" title="Incluir"><i class="fa fa-file-o"></i></a>
                 <a href="{!! route('members') !!}" type="button" class="round round-sm hollow" rel="tooltip" title="Pesquisar"><i class="fa fa-search"></i></a>            
             </div>
         </h4>
-        <hr class="hr-primary" />
+        <hr class="hr-warning" />
     </div>
-
+    
     <div class="row-fluid">
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-            <a href="{!! route('dashboard.members', ['plan_id' => 1, 'status_id' => 2]) !!}"><i class='fa fa-2x fa-eye'></i></a> 
-            <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanStatus', 'plan_id' => 1, 'status_id' => 2]) !!}"><i class='fa fa-2x fa-tag'></i></a>
-            <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByPlanStatus', 'plan_id' => 1, 'status_id' => 2]) !!}"><i class='fa fa-2x fa-print'></i></a>
+            <a href="{!! route('dashboard.members', ['plan_id' => 1, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-2x fa-eye'></i></a> 
+            <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanStatus', 'plan_id' => 1, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-2x fa-tag'></i></a>
+            <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByPlanStatus', 'plan_id' => 1, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-2x fa-print'></i></a>
             <div class="offer offer-radius offer-primary">
                 <div class="shape">
                     <div class="shape-text">
@@ -35,7 +38,7 @@
                         <i class="fa fa-envelope">{{ $plan1_allmembersemailbystatus->count() }}</i>
                     </h3>                       
                     <p>
-                        Sócios Ativos
+                        Sócios {{ $member_status->description }}
                     </p>
                 </div>
             </div>
@@ -52,11 +55,15 @@
                                     </small>
                                     <div class="pull-right">
                                         <small>
+                                            @if(is_null($plan1_allmembersbystatus->count()))
+                                                $plan1_allmembersbystatus->count() = 1; 
+                                            @endif
+
                                             {{ $region->members->count() }} ({{ number_format(100*($region->members->count()/$plan1_allmembersbystatus->count()), 0) }}%)
                                         </small>
-                                        <a href="{!! route('dashboard.members', ['plan_id' => 1, 'region_id' => $region->id, 'status_id' => 2]) !!}"><i class='fa fa-eye'></i></a> | 
-                                        <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanRegionStatus', 'plan_id' => 1, 'region_id' => $region->id, 'status_id' => 2]) !!}"><i class='fa fa-tag'></i></a> | 
-                                        <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByPlanRegionStatus', 'plan_id' => 1, 'region_id' => $region->id, 'status_id' => 2]) !!}"><i class='fa fa-print'></i></a>
+                                        <a href="{!! route('dashboard.members', ['plan_id' => 1, 'region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-eye'></i></a> | 
+                                        <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanRegionStatus', 'plan_id' => 1, 'region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-tag'></i></a> | 
+                                        <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByPlanRegionStatus', 'plan_id' => 1, 'region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-print'></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -69,9 +76,9 @@
                                                 </div>
                                                 <span class="progress-type">{{ $city->description }} / {{ $city->state->code }}</span>
                                                 <span class="progress-completed">{{ $city->members->count() }} ({{ number_format(100*($city->members->count()/$region->members->count()), 0) }}%) 
-                                                    <a href="{!! route('dashboard.members', ['plan_id' => 1, 'city_id' => $city->id, 'status_id' => 2]) !!}"><i class='fa fa-eye'></i></a> | 
-                                                    <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanCityStatus', 'plan_id' => 1, 'city_id' => $city->id, 'status_id' => 2]) !!}"><i class='fa fa-tag'></i></a> | 
-                                                    <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByPlanCityStatus', 'plan_id' => 1, 'city_id' => $city->id, 'status_id' => 2]) !!}"><i class='fa fa-print'></i></a></span>
+                                                    <a href="{!! route('dashboard.members', ['plan_id' => 1, 'city_id' => $city->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-eye'></i></a> | 
+                                                    <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanCityStatus', 'plan_id' => 1, 'city_id' => $city->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-tag'></i></a> | 
+                                                    <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByPlanCityStatus', 'plan_id' => 1, 'city_id' => $city->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-print'></i></a></span>
                                             </div>
                                         @endif
                                     @endif
@@ -86,9 +93,9 @@
 
     <div class="row-fluid">
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-            <a href="{!! route('dashboard.members', ['plan_id' => 2, 'status_id' => 2]) !!}"><i class='fa fa-2x fa-eye'></i></a> 
-            <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanStatus', 'plan_id' => 2, 'status_id' => 2]) !!}"><i class='fa fa-2x fa-tag'></i></a>
-            <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByPlanStatus', 'plan_id' => 2, 'status_id' => 2]) !!}"><i class='fa fa-2x fa-print'></i></a>
+            <a href="{!! route('dashboard.members', ['plan_id' => 2, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-2x fa-eye'></i></a> 
+            <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanStatus', 'plan_id' => 2, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-2x fa-tag'></i></a>
+            <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByPlanStatus', 'plan_id' => 2, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-2x fa-print'></i></a>
             <div class="offer offer-radius offer-primary">
                 <div class="shape">
                     <div class="shape-text">
@@ -103,7 +110,7 @@
                         <i class="fa fa-envelope">{{ $plan2_allmembersemailbystatus->count() }}</i>
                     </h3>                       
                     <p>
-                        Sócios Ativos
+                        Sócios {{ $member_status->description }}
                     </p>
                 </div>
             </div>
@@ -120,9 +127,13 @@
                                     </small>
                                     <div class="pull-right">
                                         <small>
+                                            @if(is_null($plan2_allmembersbystatus->count()))
+                                                $plan2_allmembersbystatus->count() = 1; 
+                                            @endif
+
                                             {{ $region->members->count() }} ({{ number_format(100*($region->members->count()/$plan2_allmembersbystatus->count()), 0) }}%)
                                         </small>
-                                        <a href="{!! route('dashboard.members', ['plan_id' => 2, 'region_id' => $region->id, 'status_id' => 2]) !!}"><i class='fa fa-eye'></i></a> | <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanRegionStatus', 'plan_id' => 2, 'region_id' => $region->id, 'status_id' => 2]) !!}"><i class='fa fa-tag'></i></a> | <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByPlanRegionStatus', 'plan_id' => 2, 'region_id' => $region->id, 'status_id' => 2]) !!}"><i class='fa fa-print'></i></a>
+                                        <a href="{!! route('dashboard.members', ['plan_id' => 2, 'region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-eye'></i></a> | <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanRegionStatus', 'plan_id' => 2, 'region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-tag'></i></a> | <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByPlanRegionStatus', 'plan_id' => 2, 'region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-print'></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -135,9 +146,9 @@
                                                 </div>
                                                 <span class="progress-type">{{ $city->description }} / {{ $city->state->code }}</span>
                                                 <span class="progress-completed">{{ $city->members->count() }} ({{ number_format(100*($city->members->count()/$region->members->count()), 0) }}%) 
-                                                <a href="{!! route('dashboard.members', ['plan_id' => 2, 'city_id' => $city->id, 'status_id' => 2]) !!}"><i class='fa fa-eye'></i></a> | 
-                                                <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanCityStatus', 'plan_id' => 2, 'city_id' => $city->id, 'status_id' => 2]) !!}"><i class='fa fa-tag'></i></a> | 
-                                                <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByPlanCityStatus', 'plan_id' => 2, 'city_id' => $city->id, 'status_id' => 2]) !!}"><i class='fa fa-print'></i></a></span>
+                                                <a href="{!! route('dashboard.members', ['plan_id' => 2, 'city_id' => $city->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-eye'></i></a> | 
+                                                <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanCityStatus', 'plan_id' => 2, 'city_id' => $city->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-tag'></i></a> | 
+                                                <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByPlanCityStatus', 'plan_id' => 2, 'city_id' => $city->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-print'></i></a></span>
                                             </div>
                                         @endif
                                     @endif
@@ -152,9 +163,9 @@
 
     <div class="row-fluid">
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-            <a href="{!! route('dashboard.members', ['status_id' => 2]) !!}"><i class='fa fa-2x fa-eye'></i></a> 
-            <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByStatus', 'status_id' => 2]) !!}"><i class='fa fa-2x fa-tag'></i></a>
-            <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByStatus', 'status_id' => 2]) !!}"><i class='fa fa-2x fa-print'></i></a>
+            <a href="{!! route('dashboard.members', ['status_id' => $pc_member_status_id]) !!}"><i class='fa fa-2x fa-eye'></i></a> 
+            <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByStatus', 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-2x fa-tag'></i></a>
+            <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByStatus', 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-2x fa-print'></i></a>
             <div class="offer offer-radius offer-primary">
                 <div class="shape">
                     <div class="shape-text">
@@ -169,7 +180,7 @@
                         <i class="fa fa-envelope">{{ $plan1_allmembersemailbystatus->count() + $plan2_allmembersemailbystatus->count() }}</i>
                     </h3>                       
                     <p>
-                        Sócios Ativos
+                        Sócios {{ $member_status->description }}
                     </p>
                 </div>
             </div>
@@ -188,11 +199,11 @@
                                         <small>
                                             {{ $region->members->count() }} ({{ number_format(100*($region->members->count()/($plan1_allmembersbystatus->count() + $plan2_allmembersbystatus->count())), 0) }}%)
                                         </small>
-                                        <a href="{!! route('dashboard.members', ['region_id' => $region->id, 'status_id' => 2]) !!}"><i class='fa fa-eye'></i></a> 
+                                        <a href="{!! route('dashboard.members', ['region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-eye'></i></a> 
                                         | 
-                                        <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByRegionStatus', 'region_id' => $region->id, 'status_id' => 2]) !!}"><i class='fa fa-tag'></i></a> 
+                                        <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByRegionStatus', 'region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-tag'></i></a> 
                                         | 
-                                        <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByRegionStatus', 'region_id' => $region->id, 'status_id' => 2]) !!}"><i class='fa fa-print'></i></a>
+                                        <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByRegionStatus', 'region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-print'></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -205,9 +216,9 @@
                                                 </div>
                                                 <span class="progress-type">{{ $city->description }} / {{ $city->state->code }}</span>
                                                 <span class="progress-completed">{{ $city->members->count() }} ({{ number_format(100*($city->members->count()/$region->members->count()), 0) }}%) 
-                                                    <a href="{!! route('dashboard.members', ['city_id' => $city->id, 'status_id' => 2]) !!}"><i class='fa fa-eye'></i></a> | 
-                                                    <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByCityStatus', 'city_id' => $city->id, 'status_id' => 2]) !!}"><i class='fa fa-tag'></i></a> | 
-                                                    <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByCityStatus', 'city_id' => $city->id, 'status_id' => 2]) !!}"><i class='fa fa-print'></i></a>
+                                                    <a href="{!! route('dashboard.members', ['city_id' => $city->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-eye'></i></a> | 
+                                                    <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByCityStatus', 'city_id' => $city->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-tag'></i></a> | 
+                                                    <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByCityStatus', 'city_id' => $city->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-print'></i></a>
                                                 </span>
                                             </div>
                                         @endif

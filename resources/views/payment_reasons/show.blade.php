@@ -11,7 +11,7 @@
           		<a href="{!! route('payment_reasons') !!}" type="button" class="btn btn-xs btn-danger" rel="tooltip" title="Pesquisar"><i class="fa fa-trash-o"></i></a>
         	</div>
       	</h4>
-      	<hr class="hr-primary" />
+      	<hr class="hr-warning" />
   	</div>
 
   	<div class="row">

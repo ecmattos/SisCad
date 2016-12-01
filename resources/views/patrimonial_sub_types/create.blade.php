@@ -9,7 +9,7 @@
 	   		<div class="btn-group btn-group-sm pull-right">
           		<a href="{!! route('patrimonial_sub_types') !!}" type="button" class="round round-sm hollow" rel="tooltip" title="Pesquisar"><i class="fa fa-search"></i></a>
         	</div>
-	   		<hr class="hr-primary" />
+	   		<hr class="hr-warning" />
 	   	</h4>
 	</div>
 

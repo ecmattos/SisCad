@@ -96,8 +96,6 @@
 		</div>
 </div>
 
-<hr class="hr-warning" />
-
 @section('js_scripts')
 	<script type="text/javascript">
 	  	$("#plans_list, #member_statuses_list, #member_status_reasons_list, #genders_list, #regions_list, #cities_list, #banks_list").select2();

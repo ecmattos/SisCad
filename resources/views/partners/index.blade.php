@@ -5,7 +5,7 @@
 	   	<h4>
 	   		Parceiros
       	</h4>
-      	<hr class="hr-primary" />
+      	<hr class="hr-warning" />
     </div>
 
     <div class="table-responsive">

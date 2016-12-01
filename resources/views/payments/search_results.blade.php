@@ -8,7 +8,7 @@
         		
 	        </div>
       	</h4>
-      	<hr class="hr-primary" />
+      	<hr class="hr-warning" />
     </div>
 
     <div class="col-lg-12">

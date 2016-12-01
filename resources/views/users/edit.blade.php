@@ -5,7 +5,7 @@
 	<div class="page-header text-primary">
 	   	<h4>
 	   		Administração - Usuário: Alteração
-          	<hr class="hr-primary" />
+          	<hr class="hr-warning" />
 	   	</h4>
 	</div>
 

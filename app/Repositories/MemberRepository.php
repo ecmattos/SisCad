@@ -28,11 +28,28 @@ class MemberRepository
 			->get();
 	}
 
+	public function allMembersByPlan($plan_id)
+	{
+		return $this->member
+			->wherePlanId($plan_id)
+			->orderBy('name', 'asc')
+			->get();
+	}
+
 	public function allMembersByPlanStatus($plan_id, $member_status_id)
 	{
 		return $this->member
 			->wherePlanId($plan_id)
 			->whereMemberStatusId($member_status_id)
+			->orderBy('name', 'asc')
+			->get();
+	}
+
+	public function allMembersGenderByPlan($plan_id, $gender_id)
+	{
+		return $this->member
+			->wherePlanId($plan_id)
+			->whereGenderId($gender_id)
 			->orderBy('name', 'asc')
 			->get();
 	}
@@ -43,6 +60,15 @@ class MemberRepository
 			->wherePlanId($plan_id)
 			->whereMemberStatusId($member_status_id)
 			->whereGenderId($gender_id)
+			->orderBy('name', 'asc')
+			->get();
+	}
+
+	public function allMembersEmailByPlan($plan_id)
+	{
+		return $this->member
+			->wherePlanId($plan_id)
+			->where('email', '<>', ' ')
 			->orderBy('name', 'asc')
 			->get();
 	}
@@ -186,7 +212,7 @@ class MemberRepository
 				
 				if($srch_member_status_reason_id)
 				{
-					$query->whereMeberStatusReasonId($srch_member_status_reason_id);
+					$query->whereMemberStatusReasonId($srch_member_status_reason_id);
 				}
 			})
 			->orderBy('name', 'asc')

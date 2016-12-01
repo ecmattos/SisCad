@@ -14,7 +14,7 @@
         <a href="javascript:;" onclick="onDestroy('{!! route('partners.destroy', [$partner->id]) !!}')" id="link_delete" type="button" class="round round-sm hollow red" rel="tooltip" title="Excluir"><i class="fa fa-trash-o text-danger"></i></a>
       </div>
     </h4>
-    <hr class="hr-primary" />
+    <hr class="hr-warning" />
   </div>
 
   <div class="col-sm-8">

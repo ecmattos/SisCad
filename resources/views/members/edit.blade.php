@@ -9,7 +9,7 @@
 	   		<div class="btn-group btn-group-sm pull-right">
         		
 	        </div>
-	   		<hr class="hr-primary" />
+	   		<hr class="hr-warning" />
 	   	</h4>
 	</div>
 

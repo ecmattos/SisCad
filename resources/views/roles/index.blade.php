@@ -11,7 +11,7 @@
           		<a href="{!! route('roles.create') !!}" type="button" class="round round-sm hollow green" rel="tooltip" title="Incluir"><i class="fa fa-file-o"></i></a>
         	</div>
       	</h4>
-      	<hr class="hr-primary" />
+      	<hr class="hr-warning" />
     </div>
 
     <div class="col-lg-12">
