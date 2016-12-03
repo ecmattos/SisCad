@@ -37,6 +37,10 @@ class MemberRequest extends Request
         {
             $validationMemberStatusReason = 'required|in:1';
         }
+        elseif ($member_status_id == "3")
+        {
+            $validationMemberStatusReason = 'required|in:1';
+        }
 
         return [
             'code'                      => 'required|unique:members,code,'.$this->id.',id,deleted_at,NULL',
@@ -52,7 +56,7 @@ class MemberRequest extends Request
             'zip_code'                  => 'required|digits:8',
             'phone'                     => 'telefone',
             'mobile'                    => 'celular',
-            'date_aafc_ini'             => 'required|date_format:d/m/Y',
+            'date_aafc_ini'             => 'required_if:member_status_id,1,2|date_format:d/m/Y',
             'date_aafc_fim'             => 'required_if:member_status_id,1|after:date_aafc_ini|date_format:d/m/Y',
             'member_status_reason_id'   => $validationMemberStatusReason,
             'birthday'                  => 'date_format:d/m/Y'
@@ -79,7 +83,7 @@ class MemberRequest extends Request
             'phone.telefone'                    => '<b>Telefone</b> >> Inválido.',
             'mobile.celular'                    => '<b>Celular</b> >> Inválido.',
             'birthday.date_format'              => '<b>Data de Nascimento</b> >> Inválida.',
-            'date_aafc_ini.required'            => '<b>Data de Ativo</b> >> Preenchimento obrigatório.',
+            'date_aafc_ini.required_if'         => '<b>Data de Ativo</b> >> Preenchimento obrigatório.',
             'date_aafc_ini.date_format'         => '<b>Data de Ativo</b> >> Inválida.',
             'date_aafc_fim.required_if'         => '<b>Data Desligamento</b> >> Preenchimento obrigatório.',
             'date_aafc_fim.date_format'         => '<b>Data Desligamento</b> >> Inválida.',

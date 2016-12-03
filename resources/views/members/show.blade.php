@@ -47,10 +47,12 @@
               <tr>
                 <td class="text-right">Situação</td>
                 <td class="text-left">{{ $member->member_status->description }}
+                  @if($member->member_status_id=='1')
+                    por {{ $member->member_status_reason->description }} {{ $member->date_aafc_fim->diffForHumans() }} (desde {{ $member->date_aafc_fim->format('d/m/Y') }})
+                  @endif
+
                   @if($member->member_status_id=='2')
                     {{ $member->date_aafc_ini->diffForHumans() }} (desde {{ $member->date_aafc_ini->format('d/m/Y') }}) 
-                  @else
-                    por {{ $member->member_status_reason->description }} {{ $member->date_aafc_fim->diffForHumans() }} (desde {{ $member->date_aafc_fim->format('d/m/Y') }})
                   @endif
                 </td>
               </tr>

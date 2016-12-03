@@ -47,6 +47,32 @@ class DashboardController extends Controller
     {
         $pc_member_status_id = $request->get('pc_member_status_id');
 
+        if ($pc_member_status_id == null)
+        {
+            
+            if (session('pc_member_status_id') == null)
+            {
+                session(['pc_member_status_id' => '2']);
+            }
+            else
+            {
+                session('pc_member_status_id');
+            }
+        }
+        else
+        {
+            if (($pc_member_status_id == 0) || ($pc_member_status_id >= 4))
+            {
+                dd("Situação INVÁLIDA");
+            }
+            else
+            {
+                session(['pc_member_status_id' => $request->get('pc_member_status_id')]);
+            }
+        }
+
+        $pc_member_status_id = session('pc_member_status_id');
+
         if($pc_member_status_id==0)
         {
             #$member_status = ['description' = 'TODOS'];
@@ -132,11 +158,22 @@ class DashboardController extends Controller
                     $q->get();
                 }]);
             }
-            else
+            
+            if($pc_member_status_id==2)
             {
                 $plan1_regions->load(['members' => function($q) 
                 {
                     $q->whereMemberStatusId(2);
+                    $q->wherePlanId(1);
+                    $q->get();
+                }]);
+            }
+
+            if($pc_member_status_id==3)
+            {
+                $plan1_regions->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(3);
                     $q->wherePlanId(1);
                     $q->get();
                 }]);
@@ -153,11 +190,20 @@ class DashboardController extends Controller
                     $q->get();
                 }]);
             }
-            else
+            if($pc_member_status_id==2)
             {
                 $plan1_cities->load(['members' => function($q) 
                 {
                     $q->whereMemberStatusId(2);
+                    $q->wherePlanId(1);
+                    $q->get();
+                }]);
+            }
+            if($pc_member_status_id==3)
+            {
+                $plan1_cities->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(3);
                     $q->wherePlanId(1);
                     $q->get();
                 }]);
@@ -176,6 +222,7 @@ class DashboardController extends Controller
 
             $plan2_allmembersemailbystatus = $this->memberRepository->allMembersEmailByPlanStatus(2, $pc_member_status_id);
             
+            
             $plan2_regions = $this->regionRepository->allRegions();
             if($pc_member_status_id==1)
             {
@@ -186,7 +233,7 @@ class DashboardController extends Controller
                     $q->get();
                 }]);
             }
-            else
+            if($pc_member_status_id==2)
             {
                 $plan2_regions->load(['members' => function($q) 
                 {
@@ -195,7 +242,17 @@ class DashboardController extends Controller
                     $q->get();
                 }]);
             }
+            if($pc_member_status_id==3)
+            {
+                $plan2_regions->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(3);
+                    $q->wherePlanId(2);
+                    $q->get();
+                }]);
+            }
 
+            
             $plan2_cities = $this->cityRepository->allCities();
             if($pc_member_status_id==1)
             {
@@ -206,7 +263,7 @@ class DashboardController extends Controller
                     $q->get();
                 }]);
             }
-            else
+            if($pc_member_status_id==2)
             {
                 $plan2_cities->load(['members' => function($q) 
                 {
@@ -215,7 +272,17 @@ class DashboardController extends Controller
                     $q->get();
                 }]);
             }
+            if($pc_member_status_id==3)
+            {
+                $plan2_cities->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(3);
+                    $q->wherePlanId(2);
+                    $q->get();
+                }]);
+            }
             
+
             $plan_regions = $this->regionRepository->allRegions();
             if($pc_member_status_id==1)
             {
@@ -225,7 +292,7 @@ class DashboardController extends Controller
                     $q->get();
                 }]);
             }
-            else
+            if($pc_member_status_id==2)
             {
                 $plan_regions->load(['members' => function($q) 
                 {
@@ -233,7 +300,14 @@ class DashboardController extends Controller
                     $q->get();
                 }]);
             }
-
+            if($pc_member_status_id==3)
+            {
+                $plan_regions->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(3);
+                    $q->get();
+                }]);
+            }
             
 
             $plan_cities = $this->cityRepository->allCities();
@@ -245,11 +319,19 @@ class DashboardController extends Controller
                     $q->get();
                 }]);
             }
-            else
+            if($pc_member_status_id==2)
             {
                 $plan_cities->load(['members' => function($q) 
                 {
                     $q->whereMemberStatusId(2);
+                    $q->get();
+                }]);
+            }
+            if($pc_member_status_id==3)
+            {
+                $plan_cities->load(['members' => function($q) 
+                {
+                    $q->whereMemberStatusId(3);
                     $q->get();
                 }]);
             }

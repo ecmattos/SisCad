@@ -45,7 +45,7 @@
     				<span class="icon-bar"></span>
     				<span class="icon-bar"></span>
     			</button>
-    			<a class="brand" href="{{ url('/') }}"><img src="{{ url('img/AAFF_logomarca_400_065.png') }}" class="img-responsive" width="280"></a>
+    			<a class="brand" href="{{ url('http://www.aafcorsan.com.br') }}" target="_blank"><img src="{{ url('img/AAFF_logomarca_400_065.png') }}" class="img-responsive" width="280"></a>
 	   		</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

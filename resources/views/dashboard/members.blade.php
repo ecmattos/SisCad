@@ -6,9 +6,10 @@
         <h4>
             <i class="fa fa-users"></i> 
             Associados - Painel de controle
-            <div class="btn-group btn-group-sm btn-group-primary pull-right" role="toolbar">
+            <div class="btn-group btn-group-xs btn-group-primary pull-right" role="toolbar">
                 <a type="button" href="{!! route('dashboard.pc_members', ['pc_member_status_id' => 2]) !!}" class="btn btn-default">ATIVOS</a>
                 <a type="button" href="{!! route('dashboard.pc_members', ['pc_member_status_id' => 1]) !!}" class="btn btn-default">INATIVOS</a>
+                <a type="button" href="{!! route('dashboard.pc_members', ['pc_member_status_id' => 3]) !!}" class="btn btn-default">NAO SOCIOS</a>
                 |
                 <a href="{!! route('dashboard.pc_partners') !!}" type="button" class="round round-sm hollow" rel="tooltip" title="Ir para Painel Controle Parceiros"><i class="fa fa-sitemap"></i></a>
                 |
@@ -38,7 +39,7 @@
                         <i class="fa fa-envelope">{{ $plan1_allmembersemailbystatus->count() }}</i>
                     </h3>                       
                     <p>
-                        Sócios {{ $member_status->description }}
+                        Situação: {{ $member_status->description }}
                     </p>
                 </div>
             </div>
@@ -55,11 +56,11 @@
                                     </small>
                                     <div class="pull-right">
                                         <small>
-                                            @if(is_null($plan1_allmembersbystatus->count()))
-                                                $plan1_allmembersbystatus->count() = 1; 
+                                            @if ($plan1_allmembersbystatus->count() == '0')
+                                                0 
+                                            @else
+                                                {{ $region->members->count() }} ({{ number_format(100*($region->members->count()/$plan1_allmembersbystatus->count()), 0) }}%)
                                             @endif
-
-                                            {{ $region->members->count() }} ({{ number_format(100*($region->members->count()/$plan1_allmembersbystatus->count()), 0) }}%)
                                         </small>
                                         <a href="{!! route('dashboard.members', ['plan_id' => 1, 'region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-eye'></i></a> | 
                                         <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanRegionStatus', 'plan_id' => 1, 'region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-tag'></i></a> | 
@@ -110,7 +111,7 @@
                         <i class="fa fa-envelope">{{ $plan2_allmembersemailbystatus->count() }}</i>
                     </h3>                       
                     <p>
-                        Sócios {{ $member_status->description }}
+                        Situação: {{ $member_status->description }}
                     </p>
                 </div>
             </div>
@@ -127,11 +128,11 @@
                                     </small>
                                     <div class="pull-right">
                                         <small>
-                                            @if(is_null($plan2_allmembersbystatus->count()))
-                                                $plan2_allmembersbystatus->count() = 1; 
+                                            @if ($plan2_allmembersbystatus->count() == '0')
+                                                0 
+                                            @else
+                                                {{ $region->members->count() }} ({{ number_format(100*($region->members->count()/$plan2_allmembersbystatus->count()), 0) }}%)
                                             @endif
-
-                                            {{ $region->members->count() }} ({{ number_format(100*($region->members->count()/$plan2_allmembersbystatus->count()), 0) }}%)
                                         </small>
                                         <a href="{!! route('dashboard.members', ['plan_id' => 2, 'region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-eye'></i></a> | <a href="{!! route('dashboard.members_labels', ['model' => 'allMembersByPlanRegionStatus', 'plan_id' => 2, 'region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-tag'></i></a> | <a href="{!! route('dashboard.members_reports', ['model' => 'allMembersByPlanRegionStatus', 'plan_id' => 2, 'region_id' => $region->id, 'status_id' => $pc_member_status_id]) !!}"><i class='fa fa-print'></i></a>
                                     </div>
@@ -180,7 +181,7 @@
                         <i class="fa fa-envelope">{{ $plan1_allmembersemailbystatus->count() + $plan2_allmembersemailbystatus->count() }}</i>
                     </h3>                       
                     <p>
-                        Sócios {{ $member_status->description }}
+                        Situação: {{ $member_status->description }}
                     </p>
                 </div>
             </div>
