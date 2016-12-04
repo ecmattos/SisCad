@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
-<!-- 2016-01-20T18:51:15 -->
+<!-- 2016-04-16T08:55:51 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="members" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f152551a-cb11-4f72-92a5-6a88775ed39d">
 	<property name="net.sf.jasperreports.export.json.schema" value="/home/eduardo/Projetos/Laravel/SisCad/public/reports/members/search_results.json"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -15,7 +15,7 @@
 		<parameterDescription><![CDATA[]]></parameterDescription>
 		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
 	</parameter>
-	<parameter name="jsp_region_id" class="java.lang.Integer">
+	<parameter name="jsp_city_id" class="java.lang.Integer">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
 	</parameter>
@@ -53,7 +53,7 @@
  where 
 (`members`.`plan_id` =  $P{jsp_plan_id}) and
 (`members`.`member_status_id` =  $P{jsp_member_status_id}) and
-(`regions`.`id` =  $P{jsp_region_id}) and
+(`cities`.`id` =  $P{jsp_city_id}) and
 (`members`.`deleted_at` is null) 
   order by 
   `member_name` asc]]>
