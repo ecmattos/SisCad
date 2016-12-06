@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-12-04T09:42:08 -->
+<!-- 2016-12-05T21:48:11 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="members" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f152551a-cb11-4f72-92a5-6a88775ed39d">
 	<property name="net.sf.jasperreports.export.json.schema" value="/home/eduardo/Projetos/Laravel/SisCad/public/reports/members/search_results.json"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -110,7 +110,7 @@
 	<columnHeader>
 		<band height="23" splitType="Stretch">
 			<staticText>
-				<reportElement x="151" y="6" width="38" height="14" uuid="9ae401c1-3130-4a3b-8ce7-2d29c8d955a4"/>
+				<reportElement x="142" y="6" width="47" height="14" uuid="9ae401c1-3130-4a3b-8ce7-2d29c8d955a4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -138,7 +138,7 @@
 				<text><![CDATA[ENDERECO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="6" width="100" height="14" uuid="494de13e-93b0-4f7a-adb4-e970b4907bc3"/>
+				<reportElement x="11" y="6" width="89" height="14" uuid="494de13e-93b0-4f7a-adb4-e970b4907bc3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -159,14 +159,14 @@
 				<text><![CDATA[RG]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="111" y="6" width="18" height="14" uuid="dae133cb-6fbb-4850-ba08-1681e322ba05"/>
+				<reportElement x="101" y="6" width="18" height="14" uuid="dae133cb-6fbb-4850-ba08-1681e322ba05"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="130" y="6" width="22" height="14" uuid="88a9c87d-09db-4657-a6c0-29a6698a8d6a"/>
+				<reportElement x="120" y="6" width="22" height="14" uuid="88a9c87d-09db-4657-a6c0-29a6698a8d6a"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -197,14 +197,14 @@
 	<detail>
 		<band height="16" splitType="Stretch">
 			<textField>
-				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="130" y="0" width="22" height="14" uuid="ceea409b-e733-44e8-ac73-d1db693c11ec"/>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="120" y="0" width="22" height="14" uuid="ceea409b-e733-44e8-ac73-d1db693c11ec"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{member_status_code}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="200" y="0" width="140" height="15" uuid="2d75270a-0130-4dda-a02b-79348382f2f2"/>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="190" y="0" width="150" height="15" uuid="2d75270a-0130-4dda-a02b-79348382f2f2"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -225,7 +225,7 @@
 				<textFieldExpression><![CDATA[$F{member_address}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="150" y="0" width="40" height="14" uuid="753a5ab4-dbe6-41b2-9f35-acfdd609edf0"/>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="142" y="0" width="48" height="14" uuid="753a5ab4-dbe6-41b2-9f35-acfdd609edf0"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -239,14 +239,14 @@
 				<textFieldExpression><![CDATA[$F{region_code}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="111" y="0" width="18" height="14" uuid="1370bbde-ef09-4426-9cdf-e556a8451602"/>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="101" y="0" width="18" height="14" uuid="1370bbde-ef09-4426-9cdf-e556a8451602"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{plan_code}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="11" y="0" width="100" height="14" uuid="e3267bb6-ded0-4182-b5b5-1066079d2613"/>
+				<reportElement x="11" y="0" width="89" height="14" uuid="e3267bb6-ded0-4182-b5b5-1066079d2613"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
