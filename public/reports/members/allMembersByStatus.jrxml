@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-12-05T21:48:32 -->
+<!-- 2016-12-05T22:11:44 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="members" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f152551a-cb11-4f72-92a5-6a88775ed39d">
 	<property name="net.sf.jasperreports.export.json.schema" value="/home/eduardo/Projetos/Laravel/SisCad/public/reports/members/search_results.json"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -199,7 +199,7 @@
 				<textFieldExpression><![CDATA[$F{member_status_code}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="190" y="0" width="150" height="15" uuid="2d75270a-0130-4dda-a02b-79348382f2f2"/>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="200" y="0" width="140" height="15" uuid="2d75270a-0130-4dda-a02b-79348382f2f2"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
